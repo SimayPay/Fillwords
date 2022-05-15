@@ -86,9 +86,12 @@ function color_2(event)
     {  
         if (event.target.classList.contains("active"))                
         {
-            arr_of_bars[arr_of_bars.length - 1].style = "";
-            event.target.classList.remove("active");
-            arr_of_bars.pop();
+            for (let i = arr_of_bars.indexOf(event.target)+1; i < arr_of_bars.length; i++)
+            {
+                arr_of_bars[i].style = "";
+                arr_of_bars[i].classList.remove("active");
+            }
+            arr_of_bars.splice(arr_of_bars.indexOf(event.target)+1, arr_of_bars.length-1 - arr_of_bars.indexOf(event.target));
         }
         else 
         {
@@ -102,7 +105,7 @@ function color_2(event)
 function color_3() 
 { 
     check = false; 
-    if (checking() == true) 
+    if (checking(level_1, level_1v) == true) 
     { 
         for (i in arr_of_bars) 
         { 
@@ -122,16 +125,16 @@ function color_3()
     arr_of_bars = []; 
 } 
  
-function checking() 
+function checking(level, level_v) 
 { 
-        for (let i = 0; i < level_1v.length; i++) 
+        for (let i = 0; i < level_v.length; i++) 
         { 
             let letters = 0; 
-            if (level_1v[i].length == arr_of_bars.length) 
+            if (level_v[i].length == arr_of_bars.length) 
             { 
-                for (let j = 0; j < level_1v[i].length; j++) 
+                for (let j = 0; j < level_v[i].length; j++) 
                 { 
-                    if (level_1[level_1v[i][j][0]][level_1v[i][j][1]] == arr_of_bars[j].textContent) 
+                    if (level[level_v[i][j][0]][level_v[i][j][1]] == arr_of_bars[j].textContent) 
                     { 
                         letters++; 
                     } 
