@@ -21,8 +21,8 @@ let level_7 = ["душа", "сила", "воск", "зонт"];
 let level_8 = ["фарш", "гнев", "лифт", "тигр"]; 
 let level_9 = ["храм", "дело", "волк", "край"]; 
  
- let level = level_3;
- let level_v = level_3v;
+ let level = level_1;
+ let level_v = level_1v;
  
 //Создание поля.. 
  
