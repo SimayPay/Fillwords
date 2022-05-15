@@ -7,7 +7,13 @@ let level_1v = [[[2, 0], [2, 1], [2, 2]], [[1, 1], [1, 2], [0, 2]], [[1, 0], [0,
                 
  
 let level_2 = ["роса", "вилка"]; 
-let level_3 = ["бег", "вид", "стол", "мёд", "рог"]; 
+
+let level_3 = [ ["Б", "Е", "М", "Г"],
+                ["Д", "Г", "Ё", "О"], 
+                ["И", "В", "Д", "Р"],
+                ["Л", "О", "Т", "С"] ]; 
+let level_3v = [[[0, 0], [0, 1], [1, 1]], [[0, 2], [1, 2], [2, 2]], [[2, 3], [1, 3], [0, 3]], [[3, 3], [3, 2], [3, 1], [3, 0]], [[2, 1], [2, 0], [1, 0]]];
+
 let level_4 = ["рыба", "шут", "бой", "луг", "тир"]; 
 let level_5 = ["верх", "гора", "стог", "лист"]; 
 let level_6 = ["полк", "торт", "бусы", "окно", "тир"]; 
@@ -15,7 +21,8 @@ let level_7 = ["душа", "сила", "воск", "зонт"];
 let level_8 = ["фарш", "гнев", "лифт", "тигр"]; 
 let level_9 = ["храм", "дело", "волк", "край"]; 
  
- 
+ let level = level_3;
+ let level_v = level_3v;
  
 //Создание поля.. 
  
@@ -40,7 +47,7 @@ function createTable(size)
     } 
  return table; 
 } 
-let table = createTable(level_1.length); 
+let table = createTable(level.length); 
  
  
  
@@ -60,7 +67,7 @@ function filling(level)
         } 
     } 
 } 
-filling(level_1); 
+filling(level); 
  
  
  
@@ -68,13 +75,14 @@ filling(level_1);
  
 let check = false; 
 let arr_of_bars = []; 
+let progress = 0; 
  
 function color_1(event) 
 { 
     check = true; 
     if (event.target.classList.contains("bar") && event.target.classList.contains("colored") == false) 
     {   
-        event.target.style = "background-color: #ff976b; font-size: 120px"; 
+        event.target.style = "background-color: #ff976b; font-size: 70px"; 
         event.target.classList.add("active");
         arr_of_bars.push(event.target); 
     } 
@@ -95,7 +103,7 @@ function color_2(event)
         }
         else 
         {
-            event.target.style = "background-color: #ff976b; font-size: 120px"; 
+            event.target.style = "background-color: #ff976b; font-size: 70px"; 
             event.target.classList.add("active");
             arr_of_bars.push(event.target); 
         }
@@ -105,7 +113,7 @@ function color_2(event)
 function color_3() 
 { 
     check = false; 
-    if (checking(level_1, level_1v) == true) 
+    if (checking(level, level_v)) 
     { 
         for (i in arr_of_bars) 
         { 
@@ -113,6 +121,7 @@ function color_3()
             arr_of_bars[i].classList.add("colored");
             arr_of_bars[i].classList.remove("active");
         } 
+        progress++;
     } 
     else 
     { 
