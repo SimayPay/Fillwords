@@ -1,18 +1,24 @@
 //Уровни.. 
  
-let level_1 = [ ["о","л","г"], 
-                ["п","м","а"], 
-                ["с","о","к"] ]; 
-let level_1v = [[[2, 0], [2, 1], [2, 2]], [[1, 1], [1, 2], [0, 2]], [[1, 0], [0, 0], [0, 1]]]; 
-                
- 
-let level_2 = ["роса", "вилка"]; 
+const level_1 = {
+    letters: [ ["О","Л","Г"], ["П","М","А"], ["С","О","К"] ],
+    positions: [[[2, 0], [2, 1], [2, 2]], [[1, 1], [1, 2], [0, 2]], [[1, 0], [0, 0], [0, 1]]]
+}
+localStorage.setItem('level_1', JSON.stringify(level_1));
 
-let level_3 = [ ["Б", "Е", "М", "Г"],
-                ["Д", "Г", "Ё", "О"], 
-                ["И", "В", "Д", "Р"],
-                ["Л", "О", "Т", "С"] ]; 
-let level_3v = [[[0, 0], [0, 1], [1, 1]], [[0, 2], [1, 2], [2, 2]], [[2, 3], [1, 3], [0, 3]], [[3, 3], [3, 2], [3, 1], [3, 0]], [[2, 1], [2, 0], [1, 0]]];
+const level_2 = {
+    letters: [ ["В","О","С"], ["И","Р","А"], ["Л","К","А"] ],
+    positions: [[[1, 1], [0, 1], [0, 2], [1, 2]], [[0, 0], [1, 0], [2, 0], [2, 1], [2, 2]]]
+}
+localStorage.setItem('level_2', JSON.stringify(level_2));
+
+const level_3 = {
+    letters: [ ["Б", "Е", "М", "Г"], ["Д", "Г", "Ё", "О"], ["И", "В", "Д", "Р"], ["Л", "О", "Т", "С"] ],
+    positions: [[[0, 0], [0, 1], [1, 1]], [[0, 2], [1, 2], [2, 2]], [[2, 3], [1, 3], [0, 3]], [[3, 3], [3, 2], [3, 1], [3, 0]], [[2, 1], [2, 0], [1, 0]]]
+}
+localStorage.setItem('level_3', JSON.stringify(level_3));
+
+
 
 let level_4 = ["рыба", "шут", "бой", "луг", "тир"]; 
 let level_5 = ["верх", "гора", "стог", "лист"]; 
@@ -20,16 +26,30 @@ let level_6 = ["полк", "торт", "бусы", "окно", "тир"];
 let level_7 = ["душа", "сила", "воск", "зонт"]; 
 let level_8 = ["фарш", "гнев", "лифт", "тигр"]; 
 let level_9 = ["храм", "дело", "волк", "край"]; 
- 
- let level = level_1;
- let level_v = level_1v;
- 
+
+
+
+
+
+let level_progress = 0;
+let game_progress = 1;
+localStorage.setItem('level_progress', JSON.stringify(level_progress));
+localStorage.setItem('game_progress', JSON.stringify(game_progress));
+
+
+
+let level = JSON.parse(localStorage.getItem(''.concat('level_', game_progress)));
+
+
+
+
+
 //Создание поля.. 
  
 function createTable(size)  
 { 
  let table = document.createElement('table'); 
-    document.getElementById('container').prepend(table); 
+ document.getElementById('container').prepend(table); 
   
  for (let i = 0; i < size; i++) 
     { 
@@ -41,13 +61,13 @@ function createTable(size)
             let col = document.createElement('td') 
             row.appendChild(col); 
             let bar = document.createElement('div'); 
-            bar.className = "bar"; 
+            bar.classList.add("bar");
             col.appendChild(bar); 
-        } 
+        }  
     } 
  return table; 
 } 
-let table = createTable(level.length); 
+let table = createTable(level.letters.length); 
  
  
  
@@ -56,18 +76,18 @@ let table = createTable(level.length);
 function filling(level) 
 { 
     let trs = document.querySelectorAll('table tr'); 
- 
-    for (let i = 0; i < trs.length; i++) { 
+    for (let i = 0; i < trs.length; i++) 
+    { 
         let tr = trs[i]; 
         let tds = tr.querySelectorAll('td'); 
-         
-        for (let j = 0; j < tds.length; j++) { 
+        for (let j = 0; j < tds.length; j++) 
+        { 
             let td = tds[j]; 
             td.querySelector('.bar').textContent = level[i][j]; 
         } 
     } 
 } 
-filling(level); 
+filling(level.letters); 
  
  
  
@@ -75,8 +95,9 @@ filling(level);
  
 let check = false; 
 let arr_of_bars = []; 
-let progress = 0; 
  
+//mouse___DOWN
+
 function color_1(event) 
 { 
     check = true; 
@@ -88,6 +109,8 @@ function color_1(event)
     } 
 } 
  
+//mouse___OVER
+
 function color_2(event) 
 { 
     if (check && event.target.classList.contains("bar") && event.target.classList.contains("colored") == false) 
@@ -109,11 +132,13 @@ function color_2(event)
         }
     }  
 } 
- 
+
+//mouse___UP
+
 function color_3() 
 { 
     check = false; 
-    if (checking(level, level_v)) 
+    if (checking(level.letters, level.positions)) 
     { 
         for (i in arr_of_bars) 
         { 
@@ -121,7 +146,26 @@ function color_3()
             arr_of_bars[i].classList.add("colored");
             arr_of_bars[i].classList.remove("active");
         } 
-        progress++;
+        level_progress++;
+        localStorage.setItem('level_progress', JSON.stringify(level_progress));
+        if (level_progress == level.positions.length)
+        {
+            let bars = document.getElementsByClassName('bar');            
+            let index = 0; let timer = 1000;
+            for (let i = 0; i < bars.length; i++)
+            {
+                var intervalId = setInterval(function() {
+                    if (index >= bars.length) return clearInterval(intervalId);
+                    bars[index].style = "background-color: #00A86B";  
+                    index++;
+                  }, timer);
+                  timer -= 50;     
+            }
+            level_progress = 0;
+            game_progress++;
+            localStorage.setItem('game_progress', JSON.stringify(game_progress));
+        }
+        localStorage.setItem('level_3', JSON.stringify(level_3));
     } 
     else 
     { 
@@ -160,3 +204,4 @@ function checking(level, level_v)
 table.addEventListener('mousedown', color_1);   
 document.addEventListener('mouseover', color_2);   
 document.addEventListener('mouseup', color_3);
+
