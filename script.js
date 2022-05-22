@@ -31,14 +31,17 @@ let level_9 = ["храм", "дело", "волк", "край"];
 
 
 
-let level_progress = 0;
-let game_progress = 1;
+let level_progress = 0; //количество найденных слов на уровне
+let game_progress = 1; //текущий уровень
 localStorage.setItem('level_progress', JSON.stringify(level_progress));
 localStorage.setItem('game_progress', JSON.stringify(game_progress));
 
 
-
-let level = JSON.parse(localStorage.getItem(''.concat('level_', game_progress)));
+function level_switch(game_progress)
+{
+    let level = JSON.parse(localStorage.getItem(''.concat('level_', game_progress)));
+    return level;
+}
 
 
 
@@ -67,7 +70,7 @@ function createTable(size)
     } 
  return table; 
 } 
-let table = createTable(level.letters.length); 
+let table = createTable(level_switch(game_progress).letters.length); 
  
  
  
@@ -87,7 +90,7 @@ function filling(level)
         } 
     } 
 } 
-filling(level.letters); 
+filling(level_switch(game_progress).letters); 
  
  
  
@@ -138,7 +141,7 @@ function color_2(event)
 function color_3() 
 { 
     check = false; 
-    if (checking(level.letters, level.positions)) 
+    if (checking(level_switch(game_progress).letters, level_switch(game_progress).positions)) 
     { 
         for (i in arr_of_bars) 
         { 
@@ -148,7 +151,7 @@ function color_3()
         } 
         level_progress++;
         localStorage.setItem('level_progress', JSON.stringify(level_progress));
-        if (level_progress == level.positions.length)
+        if (level_progress == level_switch(game_progress).positions.length)
         {
             let bars = document.getElementsByClassName('bar');            
             let index = 0; let timer = 1000;
