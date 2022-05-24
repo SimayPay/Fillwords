@@ -2,7 +2,8 @@ body{
     width: 100%;
     height: 100%;
     margin: 0;
-}
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #045346;}
 
 .container{
     position: absolute;
@@ -18,7 +19,7 @@ body{
 .bar{  
     width: 150px;
     height: 150px;
-    background-color: #c6c5c5;
+    background-color: #066354;
     text-align: center;
     line-height: 150px;
     font-size: 50px;
@@ -28,27 +29,61 @@ body{
 }
 
 table{
-    
     border-collapse: collapse; 
     cursor: pointer;    
 }
 
 td, th{
     padding: 0px; 
-    border: 6px solid #e1dddd;
+    border: 6px solid #256a65;
 }
 
-.rect{
-    width: 100%;
+#rect_1{
     height: 110px;
-    display: block;
-    border: none;
-    background-color: #ff976b;
+    width: 100%;
+    background-color: #012F2C;
+    text-align: center;
+    line-height: 110px;
+    font-size: 40px;
+    font-weight: bold;
+    color:#bbded8;
 }
 
 #rect_2{
+    height: 110px;
+    width: 100%;
+    background-color: #012F2C;
+    text-align: center;
+    line-height: 110px;
+    font-size: 40px;
+    font-weight: bold;
+    color:#bbded8;
     position: absolute;
     bottom: 0;
+    vertical-align: middle;
+}
+
+a {
+    text-decoration: none;
+    position: absolute;
+    display: inline-block;    
+    padding: 0px 25px;
+    height: 60px;
+    line-height: 55px;
+    background-color: #012F2C;
+    left: 50px;
+    margin-top: 25px;
+    color:#bbded8;
+    transition: 0.3s;
+}
+
+a:hover {
+    background-color: #256a65;
+    color: #012F2C;
+}
+
+.round {
+    border-radius: 50%;
 }
 
 

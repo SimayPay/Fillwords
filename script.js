@@ -1,23 +1,21 @@
 //Уровни.. 
  
-const level_1 = {
+const arr_of_levels = [];
+
+arr_of_levels[0] = {
     letters: [ ["О","Л","Г"], ["П","М","А"], ["С","О","К"] ],
     positions: [[[2, 0], [2, 1], [2, 2]], [[1, 1], [1, 2], [0, 2]], [[1, 0], [0, 0], [0, 1]]]
 }
-localStorage.setItem('level_1', JSON.stringify(level_1));
 
-const level_2 = {
+arr_of_levels[1] = {
     letters: [ ["В","О","С"], ["И","Р","А"], ["Л","К","А"] ],
     positions: [[[1, 1], [0, 1], [0, 2], [1, 2]], [[0, 0], [1, 0], [2, 0], [2, 1], [2, 2]]]
 }
-localStorage.setItem('level_2', JSON.stringify(level_2));
 
-const level_3 = {
+arr_of_levels[2] = {
     letters: [ ["Б", "Е", "М", "Г"], ["Д", "Г", "Ё", "О"], ["И", "В", "Д", "Р"], ["Л", "О", "Т", "С"] ],
     positions: [[[0, 0], [0, 1], [1, 1]], [[0, 2], [1, 2], [2, 2]], [[2, 3], [1, 3], [0, 3]], [[3, 3], [3, 2], [3, 1], [3, 0]], [[2, 1], [2, 0], [1, 0]]]
 }
-localStorage.setItem('level_3', JSON.stringify(level_3));
-
 
 
 let level_4 = ["рыба", "шут", "бой", "луг", "тир"]; 
@@ -28,22 +26,42 @@ let level_8 = ["фарш", "гнев", "лифт", "тигр"];
 let level_9 = ["храм", "дело", "волк", "край"]; 
 
 
+let game_progress; //текущий уровень
+let level_progress; //количество найденных слов на уровне
+let table;
+let check = false; 
+let arr_of_bars = []; 
 
 
 
-let level_progress = 0; //количество найденных слов на уровне
-let game_progress = 1; //текущий уровень
-localStorage.setItem('level_progress', JSON.stringify(level_progress));
-localStorage.setItem('game_progress', JSON.stringify(game_progress));
 
-
-function level_switch(game_progress)
+function process()
 {
-    let level = JSON.parse(localStorage.getItem(''.concat('level_', game_progress)));
-    return level;
+    table = createTable(arr_of_levels[game_progress].letters.length); 
+    filling(arr_of_levels[game_progress].letters); 
+    table.addEventListener('mousedown', color_1);   
+    document.addEventListener('mouseover', color_2);   
+    document.addEventListener('mouseup', color_3);
 }
 
 
+
+function start()
+{
+    level_progress = 0;
+    if (localStorage.getItem('game_progress') === null) 
+    {
+        game_progress = 0;
+        localStorage.setItem('game_progress', JSON.stringify(game_progress));
+    }
+    else 
+    {
+        game_progress = JSON.parse(localStorage.getItem('game_progress', game_progress));
+    }
+    process(game_progress);
+}
+
+start();
 
 
 
@@ -51,26 +69,31 @@ function level_switch(game_progress)
  
 function createTable(size)  
 { 
- let table = document.createElement('table'); 
- document.getElementById('container').prepend(table); 
-  
- for (let i = 0; i < size; i++) 
-    { 
-        let row = document.createElement('tr') 
-        table.appendChild(row); 
- 
-  for (let j = 0; j < size; j++)  
+    table = document.querySelector('.table');
+    if (table != null)
+    {
+        table.remove();
+    }
+    table = document.createElement('table'); 
+    table.classList.add("table");
+    document.getElementById('container').prepend(table); 
+    
+    for (let i = 0; i < size; i++) 
         { 
-            let col = document.createElement('td') 
-            row.appendChild(col); 
-            let bar = document.createElement('div'); 
-            bar.classList.add("bar");
-            col.appendChild(bar); 
-        }  
-    } 
- return table; 
+            let row = document.createElement('tr') 
+            table.appendChild(row); 
+    
+    for (let j = 0; j < size; j++)  
+            { 
+                let col = document.createElement('td') 
+                row.appendChild(col); 
+                let bar = document.createElement('div'); 
+                bar.classList.add("bar");
+                col.appendChild(bar); 
+            }  
+        } 
+    return table; 
 } 
-let table = createTable(level_switch(game_progress).letters.length); 
  
  
  
@@ -90,15 +113,9 @@ function filling(level)
         } 
     } 
 } 
-filling(level_switch(game_progress).letters); 
  
- 
- 
-//Взаимодействие.. 
- 
-let check = false; 
-let arr_of_bars = []; 
- 
+  
+
 //mouse___DOWN
 
 function color_1(event) 
@@ -106,7 +123,7 @@ function color_1(event)
     check = true; 
     if (event.target.classList.contains("bar") && event.target.classList.contains("colored") == false) 
     {   
-        event.target.style = "background-color: #ff976b; font-size: 70px"; 
+        event.target.style = "background-color: #D2E0DB; color: #012F2C; font-size: 70px"; 
         event.target.classList.add("active");
         arr_of_bars.push(event.target); 
     } 
@@ -129,7 +146,7 @@ function color_2(event)
         }
         else 
         {
-            event.target.style = "background-color: #ff976b; font-size: 70px"; 
+            event.target.style = "background-color: #c3d6cf; color: #012F2C; font-size: 70px"; 
             event.target.classList.add("active");
             arr_of_bars.push(event.target); 
         }
@@ -138,37 +155,48 @@ function color_2(event)
 
 //mouse___UP
 
+const arr_of_colors = ["#2c9585", "#92cdb6", "#a6b15f", "#535e66", "#c9b675"]
+let colors = arr_of_colors.slice();
+
 function color_3() 
 { 
     check = false; 
-    if (checking(level_switch(game_progress).letters, level_switch(game_progress).positions)) 
+    if (checking(arr_of_levels[game_progress].letters, arr_of_levels[game_progress].positions)) 
     { 
+        let color = colors[Math.floor(Math.random() * colors.length)];
+        colors.splice((Math.floor(Math.random() * colors.length)), 1);
         for (i in arr_of_bars) 
         { 
-            arr_of_bars[i].style = "background-color: #72a7fc"; 
+            arr_of_bars[i].style.backgroundColor = color;
+            arr_of_bars[i].style.fontSize = "50px";
+            arr_of_bars[i].style.color = "#f8f8f8";
             arr_of_bars[i].classList.add("colored");
             arr_of_bars[i].classList.remove("active");
         } 
         level_progress++;
-        localStorage.setItem('level_progress', JSON.stringify(level_progress));
-        if (level_progress == level_switch(game_progress).positions.length)
+        if (level_progress == arr_of_levels[game_progress].positions.length)
         {
-            let bars = document.getElementsByClassName('bar');            
-            let index = 0; let timer = 1000;
-            for (let i = 0; i < bars.length; i++)
-            {
-                var intervalId = setInterval(function() {
-                    if (index >= bars.length) return clearInterval(intervalId);
-                    bars[index].style = "background-color: #00A86B";  
-                    index++;
-                  }, timer);
-                  timer -= 50;     
+            let bars = document.getElementsByClassName('bar');        
+
+            var i = 0;                                                                                    
+
+            function myLoop () {                                                                       
+                setTimeout(function () {                                                                          
+                    bars[i].style = "background-color: #00A86B";                                          
+                    i++;                                                                                                         
+                    if (i < bars.length) {                                                                                          
+                        myLoop();                                                      
+                    }                                                                         
+                },50)
             }
+            myLoop();  
+             
             level_progress = 0;
             game_progress++;
+            colors = arr_of_colors.slice();
             localStorage.setItem('game_progress', JSON.stringify(game_progress));
+            process();
         }
-        localStorage.setItem('level_3', JSON.stringify(level_3));
     } 
     else 
     { 
@@ -204,7 +232,5 @@ function checking(level, level_v)
         return false; 
 } 
  
-table.addEventListener('mousedown', color_1);   
-document.addEventListener('mouseover', color_2);   
-document.addEventListener('mouseup', color_3);
+
 

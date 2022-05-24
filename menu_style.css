@@ -1,0 +1,173 @@
+
+body{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #045346;
+}
+
+::-webkit-scrollbar { 
+    width: 0px; 
+    background: transparent;  
+}
+
+.container{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 150px;
+    height: 71%;
+    width: 50%;
+    justify-content: center;
+    overflow-y: auto;
+}
+
+table {
+    width: 100%;
+    height: 100%;
+    border-collapse: separate; 
+    border-spacing: 75px 40px;  
+}
+
+
+a.animated-button:link, a.animated-button:visited {
+    position: relative;
+    display: block;
+    margin: 30px auto 0;
+    padding: 14px 15px;
+    color: #e5f2ff;
+    font-size:14px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    letter-spacing: .08em;
+    border-radius: 0;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    height: 200px;
+}
+a.animated-button:link:after, a.animated-button:visited:after {
+    content: "";
+    position: absolute;
+    height: 0%;
+    left: 50%;
+    top: 50%;
+    width: 150%;
+    z-index: -1;
+    -webkit-transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    transition: all 0.5s ease 0s;
+}
+a.animated-button:link:hover, a.animated-button:visited:hover {
+    color: #e5f2ff;
+    text-shadow: none;
+}
+a.animated-button:link:hover:after, a.animated-button:visited:hover:after {
+    height: 450%;
+}
+a.animated-button:link, a.animated-button:visited {
+    position: relative;
+    display: block;
+    margin: 30px auto 0;
+    padding: 14px 15px;
+    color: #bbded8;
+    font-size:50px;
+    border-radius: 0;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    letter-spacing: .08em;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+    line-height: 200px;
+}
+
+a.animated-button.victoria-one {
+    border: 5px solid #066354;
+}
+a.animated-button.victoria-one:after {
+    background: #066354;
+    -moz-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+    -ms-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+    -webkit-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+    transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+}
+a.animated-button.victoria-two {
+    border: 5px solid #066354;
+}
+a.animated-button.victoria-two:after {
+    background: #066354;
+    -moz-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+    -ms-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+    -webkit-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+    transform: translateX(-50%) translateY(-50%) rotate(25deg);
+}
+a.animated-button.victoria-three {
+    border: 5px solid #066354;
+}
+a.animated-button.victoria-three:after {
+    background: #066354;
+    opacity: .5;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+a.animated-button.victoria-three:hover:after {
+    height: 140%;
+    opacity: 1;
+}
+a.animated-button.victoria-four {
+    border: 5px solid #066354;
+}
+a.animated-button.victoria-four:after {
+    background: #066354;
+    opacity: 0.5;
+    -moz-transform: translateY(-50%) translateX(-50%) rotate(90deg);
+    -ms-transform: translateY(-50%) translateX(-50%) rotate(90deg);
+    -webkit-transform: translateY(-50%) translateX(-50%) rotate(90deg);
+    transform: translateY(-50%) translateX(-50%) rotate(90deg);
+}
+a.animated-button.victoria-four:hover:after {
+    opacity: 10;
+    height: 600% !important;
+}
+
+#rect_1{
+    height: 110px;
+    width: 100%;
+    background-color: #012F2C;
+    text-align: center;
+    line-height: 110px;
+    font-size: 40px;
+    font-weight: bold;
+    color:#bbded8;
+}
+
+#rect_2{
+    height: 110px;
+    width: 100%;
+    background-color: #012F2C;
+    text-align: center;
+    line-height: 110px;
+    font-size: 40px;
+    font-weight: bold;
+    color:#bbded8;
+    position: absolute;
+    bottom: 0;
+}
+
+
+
+
+
+
