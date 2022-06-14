@@ -40,7 +40,7 @@ td, th{
     border: 4px solid #045346;
 }
 
-#rect_1{
+.rect {
     height: 130px;
     width: 100%;
     background-color: #012F2C;
@@ -54,17 +54,8 @@ td, th{
 }
 
 #rect_2{
-    height: 130px;
-    width: 100%;
-    background-color: #012F2C;
-    text-align: center;
-    line-height: 130px;
-    font-size: 50px;
-    font-weight: bold;
-    color:#bbded8;
     position: absolute;
     bottom: 0;
-    user-select: none;
 }
 
 .previous {

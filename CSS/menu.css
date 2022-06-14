@@ -63,7 +63,7 @@ a.animated-button {
     border: 3px solid #118975;
 }
 
-#rect_1{
+.rect {
     height: 130px;
     width: 100%;
     background-color: #012F2C;
@@ -77,14 +77,6 @@ a.animated-button {
 }
 
 #rect_2{
-    height: 130px;
-    width: 100%;
-    background-color: #012F2C;
-    text-align: center;
-    line-height: 130px;
-    font-size: 50px;
-    font-weight: bold;
-    color:#bbded8;
     position: absolute;
     bottom: 0;
 }
