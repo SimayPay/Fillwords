@@ -77,7 +77,7 @@ document.addEventListener("mouseover", function(event){
 
 document.querySelector('button').addEventListener("click", function(){
 
-    Sound_ref('../sounds/Button 6.M4A', '../HTML/menu.html');
+    Sound_ref('./sounds/Button 6.M4A', './HTML/menu.html');
 
 });
 
