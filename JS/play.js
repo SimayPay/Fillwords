@@ -365,16 +365,16 @@ function myLoop (bars, i) {
 
 //Проверка найденного слова..
 
-function checking(level, level_v) 
+function checking(levelLetters, levelPisitions) 
 { 
-    for (let i = 0; i < level_v.length; i++) 
+    for (let i = 0; i < levelPisitions.length; i++) 
     { 
         let letters = 0; 
-        if (level_v[i].length == arr_of_bars.length) 
+        if (levelPisitions[i].length == arr_of_bars.length) 
+        { 
+            for (let j = 0; j < levelPisitions[i].length; j++) 
             { 
-            for (let j = 0; j < level_v[i].length; j++) 
-            { 
-                if (level[level_v[i][j][0]][level_v[i][j][1]] == arr_of_bars[j].textContent) 
+                if (levelLetters[levelPisitions[i][j][0]][levelPisitions[i][j][1]] == arr_of_bars[j].textContent) 
                 { 
                     letters++; 
                 } 
