@@ -3,7 +3,7 @@ body{
     height: 100%;
     margin: 0;
     font-family: Tahoma, Geneva, sans-serif;
-    background-color: #045346;
+    background-color: #0b6f5e;
 }
 
 .container{
@@ -18,6 +18,36 @@ body{
     transition: all 1s ease;
     opacity: 0%;
 }
+
+/* Слоты */
+
+td {
+    border: 20px solid #0b6f5e;
+}
+
+.slot {
+    background-color: #045346;
+    width: 400px;
+    height: 150px;
+    color:aliceblue;
+    font-size: 30px;
+    text-align: center; 
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+.slot:hover {
+    background-color: #118975;
+}
+
+.text {
+    position: relative;
+    top: 35%;
+    user-select: none;
+}
+
+
+/* Верхняя и нижняя панели */
 
 .rect {
     height: 130px;
@@ -36,6 +66,9 @@ body{
     position: absolute;
     bottom: 0;
 }
+
+
+/* Кнопка "назад" */
 
 .previous {
     text-decoration: none;
@@ -63,27 +96,3 @@ body{
     cursor: pointer;
 }
 
-td {
-    border: 20px solid #045346;
-}
-
-.slot {
-    background-color: #0b705f;
-    width: 400px;
-    height: 150px;
-    color:aliceblue;
-    font-size: 30px;
-    text-align: center; 
-    transition: 0.2s;
-    cursor: pointer;
-}
-
-.slot:hover {
-    background-color: #118975;
-}
-
-.text {
-    position: relative;
-    top: 35%;
-    user-select: none;
-}
