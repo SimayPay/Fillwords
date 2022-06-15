@@ -43,7 +43,7 @@ table {
     position: relative;
 }
 
-a.animated-button {
+.btn {
     position: relative;
     display: block;
     margin: 30px auto 0;
@@ -62,7 +62,7 @@ a.animated-button {
     transition: 0.5s;
     border: 5px solid #118975;
 }
-a.animated-button:hover {
+.btn:hover {
     color: #e5f2ff;
     text-shadow: none;
     background-color: #118975;

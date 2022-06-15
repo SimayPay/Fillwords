@@ -51,7 +51,8 @@ for (let i = 0; i < game_progress.length; i++)
 
 function set_loading(event)
 {
-    if (Number(event.target.textContent)-1 >= 0)
+    console.log(event.target);
+    if (event.target.classList.contains('btn'))
     {
         let audio = Sound('../sounds/Tab 1.M4A');
 
