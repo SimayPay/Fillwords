@@ -27,6 +27,8 @@ window.onload = function() {
     let container = document.getElementById('container');
     container.style.opacity = '100%';
     volume_load();
+    if (screen.width < 1500)
+        document.querySelector("body").style.zoom = "65%";
 };
 
 

@@ -1,6 +1,6 @@
 let volume;
-let game_progress = JSON.parse(localStorage.getItem('game_progress')); //Массив с прогрессом игры..
-let set_progress = document.getElementsByClassName('bottom'); //Полосы прогресса на набрах..
+let game_progress = JSON.parse(localStorage.getItem('game_progress')); 
+let set_progress = document.getElementsByClassName('bottom'); 
 
 
 //Плавное появление игрового поля и проверка состояния звука..
@@ -9,6 +9,8 @@ window.onload = function() {
     let container = document.getElementById('container');
     container.style.opacity = '100%';
     volume_load();
+    if (screen.width < 1500)
+        document.querySelector("body").style.zoom = "65%";
 };
 
 
@@ -51,7 +53,6 @@ for (let i = 0; i < game_progress.length; i++)
 
 function set_loading(event)
 {
-    console.log(event.target);
     if (event.target.classList.contains('btn'))
     {
         let audio = Sound('../sounds/Tab 1.M4A');
@@ -127,10 +128,10 @@ document.querySelector(".volume").addEventListener("click", function(){
     }
     else
     {
+        volume = true;
         Sound('../sounds/Button 6.M4A');
         document.querySelector(".volume").classList.remove("fa-volume-off");
         document.querySelector(".volume").classList.add("fa-volume-up");
-        volume = true;
         localStorage.setItem('volume', JSON.stringify(volume));
     }
 })

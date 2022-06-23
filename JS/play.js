@@ -81,6 +81,8 @@ window.onload = function() {
     let container = document.getElementById('container');
     container.style.opacity = '100%';
     volume_load();
+    if (screen.width < 1500)
+        document.querySelector("body").style.zoom = "65%";
 };
 
 
@@ -179,7 +181,7 @@ function filling(level)
 function Down(event) 
 { 
     Sound('../sounds/Button 7.M4A');
-
+    
     check = true; 
     if (event.target.classList.contains("bar") && event.target.classList.contains("colored") == false) 
     {   
